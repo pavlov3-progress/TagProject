@@ -1,6 +1,4 @@
-dir40593
-dir54262
-dir84470
+dir68138
 img
 webalizer
 xampp
@@ -9,4 +7,4 @@ dashboard
 applications.html
 bitnami.css
 index.php
-.vscode
+*.vscode
