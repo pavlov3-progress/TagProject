@@ -9,15 +9,19 @@
     <title><%PAGETITLE></title>
   </head>
   <body>
+
+
+  
     <h1>ボード名 : <%PAGETITLE></h1>
     <h1>ボードのID : <%PAGETITLE></h1><!--update: DBからid_boardを読みだしてここに表示-->
         <!--本番環境、つまりGitHubへpushする時にはDBのユーザやパスワードはここに書かないようにする-->
 
-        <!--まずデータベースへ接続する-->
+        
         <?php
+        //まずデータベースへ接続する
         $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
 
-        //DBからデータを取得する
+        //DBからデータを取得する（最後の行から1行だけ）
         $sql = "SELECT id_board FROM board_data ORDER BY id DESC LIMIT 1;";
         $stmt = $pdo->prepare($sql);
         $stmt -> execute();
@@ -27,6 +31,7 @@
         print_r($row);
         }
 */
+        //取得したデータを表示してみる
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
         print_r($row);
         echo("<br/>");
