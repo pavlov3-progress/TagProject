@@ -10,7 +10,6 @@
   <body>
 
     <form method="POST" action="comments.php" name="comment_form">
-
       <input type="hidden" name="pid" value="<%PAGEID>">	<!-- ※1 -->
       名前：<input type="text" name="cname" size="20" required><br>
       メッセージ：<br>
@@ -18,5 +17,6 @@
       </textarea><br>
       <input type="submit" value="付箋を貼りつける" >
     </form>
+  
   </body>
 </html>
