@@ -44,26 +44,32 @@
     <form>
       <input type="button" onClick="location.href='templateC.php'" value="付箋を貼り付けたい">
     </form>
-
+<!--以下は作成されたdatファイルを開いて中のテキストを表示している-->
     <?php
 
-      $result = glob('*.dat');    //フォルダのdatファイルを変数の配列に格納
-      //var_dump($result);
-      $count = 0;
-      foreach($result as $value){
+    //まずデータベースへ接続する
+    $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
 
-        $fp2 = fopen($value,"r");   //ファイルを開く
-        $txt = fgets($fp2);         //中のテキストを変数に入れる
+    //DBからデータを取得する
+    $sql = "SELECT tag_comment,post_name FROM tag_data ORDER BY id_tag ;";
+    $stmt = $pdo->prepare($sql);
+    $stmt -> execute();
+    $count = 0;
+  
+    //取得したデータをすべて表示してみる
+    while($row = $stmt -> fetch(PDO::FETCH_ASSOC)){
+    //print_r($row);
+    
     ?>
+    
     <div id="draggable<?php echo $count ?>" class="ui-widget-content">
     <div class="husen">
-      <?php echo $txt ?>
+    <?php print_r($row); ?>
 
     </div>
     </div>
 
     <?php
-      fclose($fp2);
       $count = $count +1;
       }
     ?>
