@@ -8,7 +8,8 @@
 
 	<body>
 
-	<?php
+<!-- update:DBにidとid_boardとboard_nameとboard_contentを追加する処理-->
+<?php
 	$template = "template.php";	// テンプレートファイル名
 	$pageid = null;
 	if ($_POST{"pagetitle"}) {

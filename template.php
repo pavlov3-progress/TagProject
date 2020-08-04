@@ -10,6 +10,29 @@
   </head>
   <body>
     <h1>ボード名 : <%PAGETITLE></h1>
+    <h1>ボードのID : <%PAGETITLE></h1><!--update: DBからid_boardを読みだしてここに表示-->
+        <!--本番環境、つまりGitHubへpushする時にはDBのユーザやパスワードはここに書かないようにする-->
+
+        <!--まずデータベースへ接続する-->
+        <?php
+        $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+
+        //DBからデータを取得する
+        $sql = "SELECT id_board FROM board_data ORDER BY id DESC LIMIT 1;";
+        $stmt = $pdo->prepare($sql);
+        $stmt -> execute();
+        
+/*      取得したデータを試験的にすべて表示してみる
+        while($row = $stmt -> fetch(PDO::FETCH_ASSOC)){
+        print_r($row);
+        }
+*/
+        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+        print_r($row);
+        echo("<br/>");
+        ?>
+
+        <p>次回もこのボードに来たい時は、このIDが必要になるから控えておいてくださいね</p>
 
     <h2>説明 : <%PAGECONTENTS></h2>
 
