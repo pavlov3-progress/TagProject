@@ -10,6 +10,7 @@
 
 <!--  update:DBにidとid_boardとboard_nameとboard_contentを追加する処理-->
 <?php
+
 	$template = "template.php";	// テンプレートファイル名
 	$pageid = null;
 	if ($_POST{"pagetitle"}) {
@@ -37,7 +38,20 @@
 		$pageid = rand( 10000, 99999);
 		$filename = $pageid . ".php";
 
-		$files = "./base";		//コピー元のディレクトリのパス
+		//データベースに接続する
+		$pdo = new PDO("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+			
+		//データベースに書きこむ
+		$sql = "INSERT INTO board_data (id_board,board_name,board_content) VALUES (:pageid,:pagetitle,:honbun);";
+		$stmt = $pdo->prepare($sql);
+		$stmt -> bindValue(":pageid",$pageid, PDO::PARAM_INT);
+		$stmt -> bindParam(":pagetitle", $pagetitle, PDO::PARAM_STR);
+		$stmt -> bindParam(":honbun",$honbun, PDO::PARAM_STR);
+		$stmt -> execute();
+
+//-------------------以下はCSVファイルを格納するためのフォルダ作成コード-------------
+
+$files = "./base";		//コピー元のディレクトリのパス
 		$path = "./dir$pageid";	//フォルダ作成
 		if(mkdir($path)){
 			echo "success!  ";
@@ -65,6 +79,8 @@
 			closedir($dh);
 			}
 		}
+	
+//---------------------------------------------------------------------------
 	?>
 
 	<?php
