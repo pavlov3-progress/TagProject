@@ -25,12 +25,14 @@
 				$comment = $ctext . " ";
 				$comment.= $cname . " ";
 
-				// ※2 メッセージファイルに追記
-				$pid = rand( 10000, 99999);
-	
-				// ファイル生成
-				file_put_contents("$pid.dat", $comment);
-				echo "メッセージを送信しました";
+				$pdo = new PDO("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+			
+				//データベースに書きこむ
+				$sql = "INSERT INTO tag_data (tag_comment,post_name) VALUES (:ctext,:cname);";
+				$stmt = $pdo->prepare($sql);
+				$stmt -> bindParam(":ctext", $ctext, PDO::PARAM_STR);
+				$stmt -> bindParam(":cname",$cname, PDO::PARAM_STR);
+				$stmt -> execute();
 			}
 		?>
 		<br/>
