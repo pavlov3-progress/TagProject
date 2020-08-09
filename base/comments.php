@@ -17,21 +17,20 @@
 				// 文字コードをUTF-8に変換
 				$ctext = mb_convert_encoding($ctext, "UTF-8","AUTO");
 				$cname = mb_convert_encoding($cname, "UTF-8","AUTO");
-
 				// 改行を<br>タグに
 				$ctext = nl2br($ctext);
 
 				// メッセージ内容を編集
 				$comment = $ctext . " ";
 				$comment.= $cname . " ";
-
 				$pdo = new PDO("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
 			
 				//データベースに書きこむ
-				$sql = "INSERT INTO tag_data (tag_comment,post_name) VALUES (:ctext,:cname);";
+				$sql = "INSERT INTO tag_data (tag_comment,post_name,id_tag) VALUES (:ctext,:cname,:id_tag);";
 				$stmt = $pdo->prepare($sql);
 				$stmt -> bindParam(":ctext", $ctext, PDO::PARAM_STR);
 				$stmt -> bindParam(":cname",$cname, PDO::PARAM_STR);
+				$stmt -> bindParam(":id_tag", $id_tag, PDO::PARAM_STR);
 				$stmt -> execute();
 			}
 		?>
@@ -56,7 +55,7 @@
 			}
 		</script>
 		<form>
-			<input type="button" onClick="location.href='javascript:history.back()'" value="戻る">
+			<input type="button" onClick="location.href='<?php echo  $id_tag . ".php" ?>'" value="親ページに戻ります">
 		</form>
 	</body>
 </html>
