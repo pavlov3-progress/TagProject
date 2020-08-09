@@ -10,7 +10,7 @@
   </head>
   <body>
     <h1>ボード名 : <%PAGETITLE></h1>
-    <h1>ボードのID : <%PAGETITLE></h1><!--update: DBからid_boardを読みだしてここに表示-->
+    <h2>説明 : <%PAGECONTENTS></h2>
         <!--本番環境、つまりGitHubへpushする時にはDBのユーザやパスワードはここに書かないようにする-->
      
         <?php
@@ -24,13 +24,16 @@
         
           //取得したデータを表示してみる
           $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-          print_r($row);
+          $pagetitle = $row["id_board"];
+//          print_r($pagetitle);
           echo("<br/>");
         ?>
 
-      <p>次回もこのボードに来たい時は、このIDが必要になるから控えておいてくださいね</p>
+      <p>この親ページに入る時、そしてメッセージの送信時に、このIDが必要になるので覚えておいてください</p><br/>
+      <p>ボードID : <?php echo $row["id_board"] ?></p>
+      
 
-    <h2>説明 : <%PAGECONTENTS></h2>
+    
 
     <form>
       <input type="button" onClick="location.href='templateC.php'" value="付箋を貼り付けたい">
@@ -69,9 +72,9 @@
       $count = $count +1;
       }
     ?>
-
-    <script>
-      setTimeout("location.reload()",10000);
-    </script>
+    <form action="../templateR.php" method="POST">
+      <input type="hidden" name="pagetitle">
+      <input type="submit" value="更新" />
+    </form>
   </body>
 </html>
