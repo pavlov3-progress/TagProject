@@ -86,7 +86,7 @@ $files = "./base";		//コピー元のディレクトリのパス
 	<?php
 		// ※2 メッセージ表示
 		if (createNewPage( $filename, $template, $pagetitle, $honbun,$path)) {
-			echo $filename. "の親ページを作成しました。";
+			echo "親ページができました！<br />"."あなたのボードIDは「"."<strong>".$pageid. "</strong>"."」です！<br />トップページに戻って、このIDを入力してください！";
 		} else {
 			echo "親ページの生成に失敗しました。";
 		}
@@ -114,10 +114,12 @@ $files = "./base";		//コピー元のディレクトリのパス
 			}
 	?>
 
+		
+<!--		<input type="button" onClick="location.href=''" value="親ページへ"/> -->
+<?php // hrefの中身。入れるときは頭と後ろにPHPタグ付けてね　echo "./dir" . $pageid . "/" . $pageid . ".php" ?>
 	<form>	
-		<input type="button" onClick="location.href='<?php echo "./dir" . $pageid . "/" . $pageid . ".php" ?>'" value="親ページへ"/>
-		<input type="button" onClick="location.href='javascript:history.back()'" value="戻る">
 
+		<input type="button" onClick="location.href='javascript:history.back()'" value="戻る">
 	</form> 
 	</body>
 </html>
