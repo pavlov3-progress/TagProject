@@ -13,8 +13,7 @@
       <input type="hidden" name="pid" value="<%PAGEID>">
       名前：<input type="text" name="cname" size="20" required><br>
       メッセージ：<br>
-      <textarea name="ctext" rows="5" cols="30" required>
-      </textarea><br>
+      <textarea name="ctext" rows="5" cols="30" required></textarea><br>
       送信先ボードのID：<input type="text" name="id_tag" size="5" required><br>
       <input type="submit" value="付箋を貼りつける" >
     </form>
