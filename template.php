@@ -42,7 +42,12 @@
       $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
 
       //DBからデータを取得する
-      $sql = "SELECT tag_comment,post_name FROM tag_data ORDER BY id_tag ;";
+      //board_dataとtag_dataテーブルを結合して、同じ固有のID同士で絞り込んで表示できるようにする
+      //つまり作成した親ページと同じ固有idを持った子ページ投稿メッセージだけが、親ページに表示される
+      $sql = "SELECT tag_comment,post_name FROM 
+      tag_data LEFT JOIN board_data ON board_data.id_board = tag_data.id_tag
+      WHERE $row[id_board]=tag_data.id_tag;";
+
       $stmt = $pdo->prepare($sql);
       $stmt -> execute();
       $count = 0;
