@@ -2,7 +2,7 @@
     display: inline-block;      /* inline-block(横並びにする) */
     padding:1.3em 0;            /* 領域間の余白を指定 */
     margin: 1.2em;              /* 領域内の余白を指定 */
-    color: #CCFF66;           /* 文字色の指定*/
+    color: #000;           /* 文字色の指定*/
     background: #81afeb;      /* 領域内の背景色の指定*/
     border: solid 4px #81afeb;      /*枠線の色*/
     border-radius: 3px;               /*ボックスの角を丸める*/
