@@ -23,7 +23,7 @@
 				// メッセージ内容を編集
 				$comment = $ctext . " ";
 				$comment.= $cname . " ";
-				$pdo = new PDO("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+				$pdo = new PDO ("mysql:host=env('DB_HOST');dbname=env('DB_DATABASE');charset=utf8","env('DB_USERNAME')","env('DB_PASSWORD')");
 			
 				//データベースに書きこむ
 				$sql = "INSERT INTO tag_data (tag_comment,post_name,id_tag) VALUES (:ctext,:cname,:id_tag);";

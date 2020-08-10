@@ -15,7 +15,7 @@
      
       <?php
         //まずデータベースへ接続する
-        $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+        $pdo = new PDO ("mysql:host=env('DB_HOST');dbname=env('DB_DATABASE');charset=utf8","env('DB_USERNAME')","env('DB_PASSWORD')");
         //DBからデータを取得する（最後の行から1行だけ）
         $sql = "SELECT id_board FROM board_data ORDER BY id DESC LIMIT 1;";
         $stmt = $pdo->prepare($sql);
@@ -40,7 +40,7 @@
     <?php
 
       //まずデータベースへ接続する
-      $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+      $pdo = new PDO ("mysql:host=env('DB_HOST');dbname=env('DB_DATABASE');charset=utf8","env('DB_USERNAME')","env('DB_PASSWORD')");
 
       //DBからデータを取得する
       //board_dataとtag_dataテーブルを結合して、同じ固有のID同士で絞り込んで表示できるようにする

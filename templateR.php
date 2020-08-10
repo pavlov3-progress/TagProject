@@ -31,7 +31,7 @@
 
     <p>次回もこのボードに来たい時は、このIDが必要になるから控えておいてくださいね</p>
     <?php
-      $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+      $pdo = new PDO ("mysql:host=env('DB_HOST');dbname=env('DB_DATABASE');charset=utf8","env('DB_USERNAME')","env('DB_PASSWORD')");
 
       //DB(board_data)からデータを取得する
       //親ページタイトルと説明を読み出す

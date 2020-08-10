@@ -39,7 +39,7 @@
 			$filename = $pageid . ".php";
 
 			//データベースに接続する
-			$pdo = new PDO("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+			$pdo = new PDO ("mysql:host=env('DB_HOST');dbname=env('DB_DATABASE');charset=utf8","env('DB_USERNAME')","env('DB_PASSWORD')");
 			
 			//データベースに書きこむ
 			$sql = "INSERT INTO board_data (id_board,board_name,board_content) VALUES (:pageid,:pagetitle,:honbun);";
