@@ -9,15 +9,15 @@
     <title>おかえりなさい！</title>
   </head>
   <body>
-   <!--本番環境、つまりGitHubへpushする時にはDBのユーザやパスワードはここに書かないようにする-->
+  <!--本番環境、つまりGitHubへpushする時にはDBのユーザやパスワードはここに書かないようにする-->
      
-  <?php
-    if (!empty($_POST{"pagetitle"})) {       // ※1 POSTデータを全て受け取りエスケープして変数に入れる 
-      foreach($_POST as $k => $v) { 
-        if(get_magic_quotes_gpc()) { $v=stripslashes($v); }
-          // $v=htmlspecialchars($v);
-          $array[$k]=$v; 
-      } 
+    <?php
+      if (!empty($_POST{"pagetitle"})) {       // ※1 POSTデータを全て受け取りエスケープして変数に入れる 
+        foreach($_POST as $k => $v) { 
+          if(get_magic_quotes_gpc()) { $v=stripslashes($v); }
+            // $v=htmlspecialchars($v);
+            $array[$k]=$v; 
+        } 
       extract($array);
           
       // 文字コードをUTF-8に変換
@@ -26,34 +26,29 @@
       // 置換対象となる独自タグを設定
       $originaltag{"PAGETITLE"} = $pagetitle;
       print_r("ボードID:". $pagetitle);
-    }
-  ?>
+      }
+    ?>
 
-  <p>次回もこのボードに来たい時は、このIDが必要になるから控えておいてくださいね</p>
-  <?php
-    $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+    <p>次回もこのボードに来たい時は、このIDが必要になるから控えておいてくださいね</p>
+    <?php
+      $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
 
-    //DB(board_data)からデータを取得する
-    //親ページタイトルと説明を読み出す
-    $sql = "SELECT board_name,board_content FROM board_data 
-    WHERE id_board = $pagetitle;";
-    $stmt = $pdo->prepare($sql);
-    $stmt -> execute();
-    //
-    $title_contents = $stmt -> fetch(PDO::FETCH_ASSOC);
-  ?>
-  <h1>ボード名 : <?php echo $title_contents["board_name"] ?></h1>
-  <h2>説明 : <?php echo $title_contents["board_content"] ?></h2>
+      //DB(board_data)からデータを取得する
+      //親ページタイトルと説明を読み出す
+      $sql = "SELECT board_name,board_content FROM board_data 
+      WHERE id_board = $pagetitle;";
+      $stmt = $pdo->prepare($sql);
+      $stmt -> execute();
+      $title_contents = $stmt -> fetch(PDO::FETCH_ASSOC);
+    ?>
+    <h1>ボード名 : <?php echo $title_contents["board_name"] ?></h1>
+    <h2>説明 : <?php echo $title_contents["board_content"] ?></h2>
 
-  <form>
-    <input type="button" onClick="location.href='<?php echo "./dir" ."$pagetitle" ."/templateC.php" ?>'"value="付箋を貼り付けたい">
-  </form>
+    <form>
+      <input type="button" onClick="location.href='<?php echo "./dir" ."$pagetitle" ."/templateC.php" ?>'"value="付箋を貼り付けたい">
+    </form>
 
     <?php
-
-      //まずデータベースへ接続する
- //     $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
-
       //DBからデータを取得する
       //board_dataとtag_dataテーブルを結合して、同じ固有のID同士で絞り込んで表示できるようにする
       //つまり作成した親ページと同じ固有idを持った子ページ投稿メッセージだけが、親ページに表示される
@@ -74,7 +69,6 @@
     <div id="draggable<?php echo $count ?>" class="ui-widget-content">
       <div class="husen">
         <?php print_r($row); ?>
-
       </div>
     </div>
 

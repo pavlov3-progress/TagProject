@@ -13,24 +13,22 @@
     <h2>説明 : <%PAGECONTENTS></h2>
         <!--本番環境、つまりGitHubへpushする時にはDBのユーザやパスワードはここに書かないようにする-->
      
-        <?php
-          //まずデータベースへ接続する
-          $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
-
-          //DBからデータを取得する（最後の行から1行だけ）
-          $sql = "SELECT id_board FROM board_data ORDER BY id DESC LIMIT 1;";
-          $stmt = $pdo->prepare($sql);
-          $stmt -> execute();
+      <?php
+        //まずデータベースへ接続する
+        $pdo = new PDO ("mysql:host=127.0.0.1;dbname=sample_bbs;charset=utf8","root","");
+        //DBからデータを取得する（最後の行から1行だけ）
+        $sql = "SELECT id_board FROM board_data ORDER BY id DESC LIMIT 1;";
+        $stmt = $pdo->prepare($sql);
+        $stmt -> execute();
         
-          //取得したデータを表示してみる
-          $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-          $pagetitle = $row["id_board"];
-//          print_r($pagetitle);
-          echo("<br/>");
-        ?>
+        //取得したデータを表示してみる
+        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+        $pagetitle = $row["id_board"];
+        echo("<br/>");
+      ?>
 
-      <p>この親ページに入る時、そしてメッセージの送信時に、このIDが必要になるので覚えておいてください</p><br/>
-      <p>ボードID : <?php echo $row["id_board"] ?></p>
+    <p>この親ページに入る時、そしてメッセージの送信時に、このIDが必要になるので覚えておいてください</p><br/>
+    <p>ボードID : <?php echo $row["id_board"] ?></p>
       
 
     
@@ -64,7 +62,6 @@
     <div id="draggable<?php echo $count ?>" class="ui-widget-content">
       <div class="husen">
         <?php print_r($row); ?>
-
       </div>
     </div>
 
